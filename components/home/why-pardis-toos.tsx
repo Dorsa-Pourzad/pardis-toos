@@ -24,10 +24,7 @@ export function WhyPardisToos() {
       <div className="site-container">
         <div className="why-heading">
           <div>
-            <p className="eyebrow">
-              <span className="eyebrow-line" aria-hidden="true" />
-              انتخابی با خیال آسوده
-            </p>
+            <p className="section-kicker">انتخابی با خیال آسوده</p>
             <h2 id="why-title">چرا خانواده‌ها پردیس توس را انتخاب می‌کنند؟</h2>
           </div>
           <p className="section-copy why-intro">

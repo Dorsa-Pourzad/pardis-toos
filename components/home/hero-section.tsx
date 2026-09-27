@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowLeft, Phone, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Phone } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -7,7 +7,7 @@ export function HeroSection() {
       <div className="site-container hero-grid">
         <div className="hero-copy">
           <p className="eyebrow">
-            <span className="eyebrow-line" aria-hidden="true" />
+            {/*<span className="eyebrow-line" aria-hidden="true" />*/}
             مرکز توانبخشی و مراقبتی سالمندان در مشهد
           </p>
           <h1 id="hero-title">
@@ -36,7 +36,6 @@ export function HeroSection() {
         </div>
 
         <div className="hero-media-column">
-          <div className="hero-media-accent" aria-hidden="true" />
           <div className="hero-media">
             <Image
               src="/images/center-building.jpg"
@@ -44,22 +43,14 @@ export function HeroSection() {
               fill
               priority
               sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1280px) 52vw, 620px"
-              className="cover-image hero-image"
+              className="cover-image hero-image photo-treatment"
             />
-            <div className="hero-caption">
-              <span>پردیس توس</span>
-              <small>مرکز جامع توانبخشی و مراقبتی سالمندان</small>
-            </div>
           </div>
-          <div className="hero-trust-notes" aria-label="اطلاعات اعتمادساز">
-            <div className="hero-trust-note">
-              <strong>+۱۵ سال</strong>
-              <span>تجربه مراقبت و همراهی</span>
-            </div>
-            <div className="hero-trust-note">
-              <ShieldCheck aria-hidden="true" size={18} strokeWidth={1.8} />
-              <span>تحت نظارت بهزیستی</span>
-            </div>
+          <div className="hero-image-meta" aria-label="اطلاعات اعتمادساز">
+            <span>
+              <strong>+۱۵ سال</strong> تجربه مراقبت و همراهی
+            </span>
+            <span>تحت نظارت بهزیستی</span>
           </div>
         </div>
       </div>

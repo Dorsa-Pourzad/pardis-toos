@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShieldCheck } from "lucide-react";
 
 export function AboutPreview() {
   return (
@@ -8,11 +8,11 @@ export function AboutPreview() {
         <div className="about-media">
           <div className="about-image-frame">
             <Image
-              src="/images/center-building.jpg"
-              alt="ورودی مرکز پردیس توس در مشهد"
+              src="/images/aboutImage.jpg"
+              alt="حیاط و فضای سبز مرکز پردیس توس در مشهد"
               fill
               sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1100px) 46vw, 520px"
-              className="cover-image about-image"
+              className="cover-image about-image photo-treatment"
             />
           </div>
           <p className="about-location">مشهد، راهنمایی ۱۴، پلاک ۲</p>
@@ -20,16 +20,20 @@ export function AboutPreview() {
 
         <div className="about-copy">
           <p className="eyebrow">
-            <span className="eyebrow-line" aria-hidden="true" />
             درباره پردیس توس
           </p>
           <h2 id="about-title">بیش از ۱۵ سال همراه سالمندان و خانواده‌ها</h2>
           <p className="section-copy">
-            پردیس توس از سال ۱۳۸۹ در مشهد فعالیت می‌کند؛ مرکزی برای مراقبت
-            حرفه‌ای سالمندان در محیطی امن و صمیمی، با همراهی پرسنلی باتجربه.
-            این مجموعه دارای مجوز است و تحت نظارت اداره کل بهزیستی استان
-            خراسان رضوی فعالیت می‌کند.
+            مرکز جامع توانبخشی و مراقبتی سالمندان پردیس توس از سال ۱۳۸۹ در
+            مشهد فعالیت می‌کند. این مجموعه با بهره‌گیری از پرسنل باتجربه و
+            ارائه خدمات تخصصی پزشکی، پرستاری و توانبخشی، تلاش می‌کند محیطی
+            امن، آرام و صمیمی برای سالمندان فراهم کند.
           </p>
+
+          <div className="about-trust" aria-label="مجوز و نظارت مرکز">
+            <ShieldCheck aria-hidden="true" size={20} strokeWidth={1.75} />
+            <span>دارای مجوز و تحت نظارت اداره کل بهزیستی استان خراسان رضوی</span>
+          </div>
 
           <div className="about-meta" aria-label="اطلاعات مجموعه">
             <span>صاحب امتیاز</span>
