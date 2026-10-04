@@ -1,27 +1,30 @@
-import Image from "next/image";
 import { ArrowLeft, Phone } from "lucide-react";
+
+import { HeroGallery } from "@/components/home/hero-gallery";
+import { BotanicalDecoration } from "@/components/shared/botanical-decoration";
 
 export function HeroSection() {
   return (
-    <section className="hero-section" id="home" aria-labelledby="hero-title">
+    <section className="hero-section" id="home" data-nav-section="home" aria-labelledby="hero-title">
+      <div className="hero-botanical-decoration" aria-hidden="true">
+        <BotanicalDecoration variant="main" className="hero-botanical-branch hero-botanical-branch-main" />
+        <BotanicalDecoration variant="left" className="hero-botanical-branch hero-botanical-branch-left" />
+      </div>
+
       <div className="site-container hero-grid">
         <div className="hero-copy">
           <p className="eyebrow">
-            {/*<span className="eyebrow-line" aria-hidden="true" />*/}
-            مرکز توانبخشی و مراقبتی سالمندان در مشهد
+            <span className="eyebrow-line" aria-hidden="true" />
+            مرکز توانبخشی و مراقبتی سالمندان پردیس توس در مشهد
           </p>
           <h1 id="hero-title">
             آرامش عزیزان شما،
-            <span className="hero-highlight">اطمینان خاطر شما</span>
+            <span className="hero-highlight">اولویت ماست</span>
           </h1>
-          <p className="hero-description">
-            مرکز توانبخشی و مراقبتی سالمندان پردیس توس، از سال ۱۳۸۹ با ارائه
-            خدمات تخصصی پزشکی، پرستاری و توانبخشی، همراه سالمندان و
-            خانواده‌هایشان در مشهد است.
-          </p>
+          <p className="hero-description">پردیس توس از سال ۱۳۸۹ در کنار شماست تا با خدمات تخصصی پزشکی، پرستاری و توانبخشی، مراقب آرامش و سلامت عزیزانتان باشد.</p>
           <div className="hero-actions">
             <a className="button button-primary button-large" href="#consultation">
-              <span>درخواست مشاوره</span>
+              <span>درخواست مشاوره و بازدید</span>
               <ArrowLeft aria-hidden="true" size={18} strokeWidth={1.9} />
             </a>
             <a className="button button-secondary button-large" href="tel:09155031799">
@@ -29,23 +32,10 @@ export function HeroSection() {
               <span>تماس با مرکز</span>
             </a>
           </div>
-          <p className="availability-note">
-            <span className="availability-dot" aria-hidden="true" />
-            پاسخگویی شبانه‌روزی
-          </p>
         </div>
 
         <div className="hero-media-column">
-          <div className="hero-media">
-            <Image
-              src="/images/center-building.jpg"
-              alt="نمای بیرونی مرکز پردیس توس در مشهد"
-              fill
-              priority
-              sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1280px) 52vw, 620px"
-              className="cover-image hero-image photo-treatment"
-            />
-          </div>
+          <HeroGallery />
           <div className="hero-image-meta" aria-label="اطلاعات اعتمادساز">
             <span>
               <strong>+۱۵ سال</strong> تجربه مراقبت و همراهی

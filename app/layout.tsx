@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
 import "./globals.css";
 
 const vazirmatn = Vazirmatn({
@@ -29,7 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={vazirmatn.variable}>{children}</body>
+      <body className={vazirmatn.variable}>
+        <a className="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

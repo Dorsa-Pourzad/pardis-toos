@@ -44,3 +44,15 @@ next-env.d.ts
 /.codex/
 /outputs/
 /work/
+
+# Local IDE, analysis, cache, log, and build artifacts
+/.idea/
+/graphify-out/
+*.tsbuildinfo
+.cache/
+*.log
+/build/
+.eslintcache
+
+# Legacy hosting metadata; not required by the local application.
+/.openai/
