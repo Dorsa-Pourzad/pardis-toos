@@ -11,7 +11,7 @@ import {
   UserRound,
 } from "lucide-react";
 
-import { siteContact } from "@/lib/site-content";
+import { consultationTopics, siteContact } from "@/lib/site-content";
 
 type ConsultationValues = {
   name: string;
@@ -30,8 +30,6 @@ const initialValues: ConsultationValues = {
   topic: "",
   details: "",
 };
-
-const topics = ["شرایط پذیرش", "خدمات و مراقبت", "هزینه‌ها", "سایر"];
 
 function normalizePhone(value: string) {
   return value
@@ -218,7 +216,7 @@ export function ConsultationForm() {
               onBlur={() => touchField("topic")}
             >
               <option value="" disabled>لطفاً انتخاب کنید</option>
-              {topics.map((topic) => <option key={topic} value={topic}>{topic}</option>)}
+              {consultationTopics.map((topic) => <option key={topic} value={topic}>{topic}</option>)}
             </select>
             <ChevronDown className="consultation-select-arrow" aria-hidden="true" size={17} />
           </div>

@@ -14,6 +14,8 @@ export const siteContact = {
   address: "مشهد، راهنمایی ۱۴، پلاک ۲",
 } as const;
 
+export const consultationTopics = ["شرایط پذیرش", "خدمات و مراقبت", "هزینه‌ها", "سایر"] as const;
+
 export const galleryImages = [
   {
     src: "/images/optimized/hero-seniors-garden.webp",
