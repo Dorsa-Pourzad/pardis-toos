@@ -3707,6 +3707,87 @@ img {
   white-space: nowrap;
 }
 
+.admin-heading-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.admin-notification-control {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid rgba(9, 167, 156, 0.16);
+  border-radius: 10px;
+  padding: 5px 8px 5px 6px;
+  background: rgba(255, 254, 250, 0.9);
+  color: var(--deep-teal);
+}
+
+.admin-notification-control--disabled,
+.admin-notification-control--unsupported,
+.admin-notification-control--denied {
+  border-color: rgba(139, 64, 56, 0.14);
+  color: #8b4038;
+}
+
+.admin-notification-control--error {
+  border-color: rgba(201, 138, 19, 0.2);
+  color: #a66d09;
+}
+
+.admin-notification-copy {
+  display: grid;
+  min-width: 0;
+  gap: 0;
+  line-height: 1.5;
+}
+
+.admin-notification-copy strong {
+  color: var(--primary-text);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-notification-copy small {
+  max-width: 185px;
+  overflow: hidden;
+  color: var(--muted-text);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-notification-control > button {
+  min-height: 26px;
+  border: 0;
+  border-radius: 7px;
+  padding: 4px 8px;
+  background: var(--soft-teal);
+  color: var(--deep-teal);
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-notification-control > button:hover {
+  background: #d9efeb;
+}
+
+.admin-notification-control > button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.admin-spin {
+  animation: admin-spin 850ms linear infinite;
+}
+
 .admin-summary-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -4320,6 +4401,10 @@ img {
   to { background-position: -100% 0; }
 }
 
+@keyframes admin-spin {
+  to { transform: rotate(360deg); }
+}
+
 @media (max-width: 1100px) {
   .admin-content {
     width: min(calc(100% - 48px), 1170px);
@@ -4443,6 +4528,11 @@ img {
     align-items: flex-start;
     flex-direction: column;
     gap: 13px;
+  }
+
+  .admin-heading-actions {
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .admin-data-note {
@@ -4654,7 +4744,8 @@ img {
   .admin-mobile-backdrop,
   .admin-drawer-overlay,
   .admin-details-drawer,
-  .admin-loading-line {
+  .admin-loading-line,
+  .admin-spin {
     animation: none;
     transition: none;
   }

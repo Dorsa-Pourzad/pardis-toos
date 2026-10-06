@@ -1,15 +1,16 @@
 # Pardis Toos
 
-Pardis Toos is the frontend website for a senior care and rehabilitation center in Mashhad. The current repository contains the public-facing website and the initial scaffolding for future backend work.
+Pardis Toos is the public website for a senior care and rehabilitation center in Mashhad. The frontend is connected to an independent Flask/PostgreSQL backend located at `D:\Arian\Projects\backend`.
 
 ## Stack
 
 - React 19 with Vinext and Vite
 - TypeScript
 - Tailwind CSS 4 and shadcn/ui components
-- Cloudflare Worker runtime with optional D1/Drizzle scaffolding
+- Flask API with SQLAlchemy and psycopg
+- PostgreSQL
 
-## Requirements
+## Frontend requirements
 
 - Node.js `>=22.13.0`
 - npm
@@ -28,11 +29,10 @@ The development server runs locally at `http://localhost:5173`.
 ```bash
 npm run lint         # Run ESLint
 npm run build        # Build the production artifact locally
-npm run start        # Run the built Worker locally through Wrangler
-npm run db:generate  # Generate Drizzle migrations after schema changes
+npm run start        # Run the built frontend locally
 ```
 
-Run `npm run build` before `npm run start`. The local Worker/D1 preview requires the appropriate Cloudflare `DB` binding when database-backed features are added.
+Run the Flask backend separately by following `D:\Arian\Projects\backend\README.md`. The frontend reads `NEXT_PUBLIC_API_BASE_URL` and defaults to `http://localhost:5000/api/v1`.
 
 ## Project structure
 
@@ -40,16 +40,15 @@ Run `npm run build` before `npm run start`. The local Worker/D1 preview requires
 - `components/` — page sections and reusable UI components
 - `lib/` — site content and shared utilities
 - `public/` — static images and other public assets
-- `db/` — database access and the application schema
-- `drizzle.config.ts` — Drizzle migration configuration
 - `scripts/` — local install, development, and build helpers
+- `D:\Arian\Projects\backend` — independent Flask/PostgreSQL API
 
-## Backend status
+## Backend integration
 
-The backend, API routes, and database persistence are not fully implemented yet. The main database schema is intentionally empty, while the D1/Drizzle files provide a starting point for future work.
+The consultation form sends data to `POST /api/v1/contact-requests`. The admin panel uses the authenticated Flask API for login, request listing, search, status filtering, complete request details, summary counts, status changes, and logout. Mock requests and placeholder authentication behavior have been removed.
 
-The consultation form UI is implemented, but it is not connected to a real backend endpoint or server action. It does not persist or send requests yet. A Backend Developer can add the API, validation, persistence, migrations, authentication, and tests in a later phase.
+The backend includes PostgreSQL models, an initial SQL migration, session authentication with CSRF protection, validation, a health endpoint, a database bootstrap CLI, Docker Compose for local PostgreSQL, and API tests. Follow the backend README for setup and admin creation.
 
 ## Environment variables
 
-The current frontend does not require a local environment file. If backend development introduces required variables, document their names and safe placeholders in `.env.example`; keep real values in ignored `.env*` files.
+Copy `.env.example` to `.env.local` when the backend is hosted somewhere other than the default URL. Keep real values in ignored `.env*` files.

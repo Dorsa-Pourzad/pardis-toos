@@ -11,6 +11,7 @@ import {
   UserRound,
 } from "lucide-react";
 
+import { createContactRequest } from "@/lib/api";
 import { consultationTopics, siteContact } from "@/lib/site-content";
 
 type ConsultationValues = {
@@ -67,10 +68,12 @@ type ConsultationRequest = Omit<ConsultationValues, "phone"> & { phone: string }
 async function submitConsultationRequest(
   request: ConsultationRequest,
 ): Promise<{ status: "success" } | { status: "unavailable" }> {
-  void request;
-  // Integration point: connect a verified first-party server action/API here.
-  // Fail closed until one exists; never present local validation as a saved request.
-  return { status: "unavailable" };
+  try {
+    await createContactRequest(request);
+    return { status: "success" };
+  } catch {
+    return { status: "unavailable" };
+  }
 }
 
 export function ConsultationForm() {

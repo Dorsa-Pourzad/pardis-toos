@@ -5,16 +5,32 @@ import { useState, type FormEvent } from "react";
 import { ArrowLeft, Eye, EyeOff, LockKeyhole, UserRound } from "lucide-react";
 
 import { AdminBrandLogo } from "@/components/admin/admin-brand";
+import { ApiError, getApiErrorMessage, loginAdmin } from "@/lib/api";
 
 export function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
-  const [isUnavailable, setIsUnavailable] = useState(false);
+  const [identity, setIdentity] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Integration point: submit credentials to the backend auth flow here.
-    // This UI intentionally does not invent authentication or redirect behavior.
-    setIsUnavailable(true);
+    setErrorMessage(null);
+    setIsSubmitting(true);
+    try {
+      await loginAdmin({ identity, password, remember });
+      window.location.replace("/admin");
+    } catch (error) {
+      setErrorMessage(
+        error instanceof ApiError && error.status === 401
+          ? "نام کاربری یا رمز عبور نادرست است."
+          : getApiErrorMessage(error, "ورود به پنل انجام نشد. اتصال به سرور را بررسی کنید."),
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -65,7 +81,11 @@ export function AdminLogin() {
                   autoComplete="username"
                   placeholder="example@pardis-toos.ir"
                   required
-                  onChange={() => setIsUnavailable(false)}
+                  value={identity}
+                  onChange={(event) => {
+                    setIdentity(event.target.value);
+                    setErrorMessage(null);
+                  }}
                 />
               </div>
             </div>
@@ -81,7 +101,11 @@ export function AdminLogin() {
                   autoComplete="current-password"
                   placeholder="رمز عبور خود را وارد کنید"
                   required
-                  onChange={() => setIsUnavailable(false)}
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                    setErrorMessage(null);
+                  }}
                 />
                 <button
                   className="admin-password-toggle"
@@ -97,20 +121,26 @@ export function AdminLogin() {
 
             <div className="admin-auth-options">
               <label className="admin-checkbox-label" htmlFor="admin-remember">
-                <input id="admin-remember" name="remember" type="checkbox" />
+                <input
+                  id="admin-remember"
+                  name="remember"
+                  type="checkbox"
+                  checked={remember}
+                  onChange={(event) => setRemember(event.target.checked)}
+                />
                 <span>مرا به خاطر بسپار</span>
               </label>
               <span className="admin-auth-hint">دسترسی داخلی</span>
             </div>
 
-            <button className="admin-primary-button admin-auth-submit" type="submit">
-              <span>ورود به پنل</span>
+            <button className="admin-primary-button admin-auth-submit" type="submit" disabled={isSubmitting}>
+              <span>{isSubmitting ? "در حال ورود..." : "ورود به پنل"}</span>
               <ArrowLeft aria-hidden="true" size={18} />
             </button>
 
-            {isUnavailable && (
-              <p className="admin-integration-message" role="status" aria-live="polite">
-                سرویس احراز هویت هنوز به این رابط متصل نشده است.
+            {errorMessage && (
+              <p className="admin-integration-message" role="alert" aria-live="assertive">
+                {errorMessage}
               </p>
             )}
           </form>
